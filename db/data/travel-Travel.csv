@@ -1,0 +1,2 @@
+travelId,origin,destination,dateOfDeparture,dateOfArrival,dateOfReturn,description,price,travelStatus,noOfDays,noOfPassengers,passengerName,travelType,travelMode,RoundTrip,Accomandation,billable
+INTR1001,Delhi,Mumbai,2023-09-22,2023-09-23,2023-09-30,Trip to Mumbai,12345,Open,4,4,Himanshu,Domestic,Flight,Round,Yes,Yes
