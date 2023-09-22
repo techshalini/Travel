@@ -165,7 +165,7 @@ entity Travel {
     travelStatus    : Status;
     noOfDays        : Integer;
     noOfPassengers  : NOp;
-    passengerName   : array of String(10);
+    passengerName   : String;
     travelType      : TType;
     travelCity      : Association to NationalCities;
     travelMode      : Mode;
