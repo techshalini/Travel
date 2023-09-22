@@ -18,13 +18,13 @@ type Status
 : String enum {
 
 
-    Approved   = 'APD';
+    Approved      = 'APD';
 
 
-    Inprogress = 'INP';
+    Inprogress    = 'INP';
 
 
-    Reject     = 'RJT'
+    Reject        = 'RJT'
 
 
 }
@@ -33,15 +33,19 @@ type Status
 type NOp           : String enum {
 
 
-    one        = '1';
+    one           = '1';
 
-    two        = '2';
 
-    three      = '3';
+    two           = '2';
 
-    four       = '4';
 
-    five       = '5'
+    three         = '3';
+
+
+    four          = '4';
+
+
+    five          = '5'
 
 
 }
@@ -50,10 +54,10 @@ type NOp           : String enum {
 type TType         : String enum {
 
 
-    National='National';
+    National      = 'National';
 
 
-    International='International';
+    International = 'International';
 
 
 }
@@ -65,16 +69,16 @@ type Mode          :
 String enum {
 
 
-    Flight     = 'Flight';
+    Flight        = 'Flight';
 
 
-    Train      = 'Train';
+    Train         = 'Train';
 
 
-    Car        = 'Car';
+    Car           = 'Car';
 
 
-    Other      = 'Other'
+    Other         = 'Other'
 
 
 }
@@ -83,10 +87,10 @@ String enum {
 type RoundTrip     : String enum {
 
 
-    OneWay     = 'OneWay';
+    OneWay        = 'OneWay';
 
 
-    TwoWay     = 'TwoWay';
+    TwoWay        = 'TwoWay';
 
 
 }
@@ -95,10 +99,10 @@ type RoundTrip     : String enum {
 type Billable      : String enum {
 
 
-    Yes        = 'Yes';
+    Yes           = 'Yes';
 
 
-    No         = 'No'
+    No            = 'No'
 
 
 }
@@ -107,16 +111,17 @@ type Billable      : String enum {
 type Accomandation : String enum {
 
 
-    Yes        = 'Yes';
+    Yes           = 'Yes';
 
 
-    No         = 'No'
+    No            = 'No'
 
 
 }
 
 
 entity Employee {
+
 
     key Empid        : String;
         Name         : String;
@@ -126,7 +131,11 @@ entity Employee {
         dateofBirth  : Date;
         department   : String;
 
-        
+
+        Travel       : Composition of many Travel
+
+
+                           on Travel.empId = $self;
 
 
 }
@@ -134,30 +143,35 @@ entity Employee {
 
 entity NationalCities {
 
+
     cityName : String;
+
 
 }
 
 
 entity Travel {
-       key travelId: String;
-        origin          : String;
-        destination     : String;
-        dateOfDeparture : Date;
-        dateOfArrival   : Date;
-        dateOfReturn    : Date;
-        description     : String;
-        price           : Integer;
-        travelStatus    : String;
-        noOfDays        : Integer;
-        noOfPassengers  : String;
-        passengerName   : String;
-        travelType      : String;
-        travelCity      : String;
-        travelMode      : String;
-        RoundTrip       : String;
-        Accomandation   : String;
-        billable        : String;
+
+
+    travelId        : String;
+    empId           : Association to Employee;
+    origin          : String;
+    destination     : String;
+    dateOfDeparture : Date;
+    dateOfArrival   : Date;
+    dateOfReturn    : Date;
+    description     : String;
+    price           : Integer;
+    travelStatus    : Status;
+    noOfDays        : Integer;
+    noOfPassengers  : NOp;
+    passengerName   : array of String(10);
+    travelType      : TType;
+    travelCity      : Association to NationalCities;
+    travelMode      : Mode;
+    RoundTrip       : RoundTrip;
+    Accomandation   : Accomandation;
+    billable        : Billable;
 
 
 }
