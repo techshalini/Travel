@@ -5,8 +5,10 @@ service travelService {
 
 
     entity Employee       as projection on t.Employee;
-    entity Travel         as projection on t.Travel;
-    entity NationalCities as projection on t.NationalCities;
 
+    entity NationalCities as projection on t.NationalCities;
+    @odata.draft.enabled
+    entity Travel         as projection on t.Travel; 
 
 }
+  
