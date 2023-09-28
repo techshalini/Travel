@@ -150,11 +150,11 @@ entity NationalCities {
 }
 
 
-entity Travel {
+entity Travel :managed {
 
 
-    key travelId        : String;
-    empId           : Association to Employee;
+   key travelId        : UUID;
+  empId           : Association to Employee;
     origin          : String;
     destination     : String;
     dateOfDeparture : Date;

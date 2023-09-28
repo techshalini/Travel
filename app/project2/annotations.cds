@@ -4,28 +4,32 @@ annotate service.Travel with @(
     UI.LineItem : [
         {
             $Type : 'UI.DataField',
-            Label : 'travelId',
+            Label : 'Travel ID',
             Value : travelId,
         },
         {
             $Type : 'UI.DataField',
-            Label : 'empId_Empid',
+            Label : '{i18n>EmployeeId}',
             Value : empId_Empid,
         },
         {
             $Type : 'UI.DataField',
-            Label : 'origin',
+            Label : '{i18n>Origin}',
             Value : origin,
         },
         {
             $Type : 'UI.DataField',
-            Label : 'destination',
+            Label : '{i18n>Destination}',
             Value : destination,
         },
         {
             $Type : 'UI.DataField',
-            Label : 'dateOfDeparture',
+            Label : '{i18n>DateOfDeparture}',
             Value : dateOfDeparture,
+        },
+        {
+            $Type : 'UI.DataField',
+            Value : travelStatus,
         },
     ]
 );
@@ -35,73 +39,13 @@ annotate service.Travel with @(
         Data : [
             {
                 $Type : 'UI.DataField',
-                Label : 'travelId',
-                Value : travelId,
-            },
-            {
-                $Type : 'UI.DataField',
-                Label : 'empId_Empid',
-                Value : empId_Empid,
-            },
-            {
-                $Type : 'UI.DataField',
-                Label : 'origin',
-                Value : origin,
-            },
-            {
-                $Type : 'UI.DataField',
-                Label : 'destination',
-                Value : destination,
-            },
-            {
-                $Type : 'UI.DataField',
-                Label : 'dateOfDeparture',
-                Value : dateOfDeparture,
-            },
-            {
-                $Type : 'UI.DataField',
-                Label : 'dateOfArrival',
-                Value : dateOfArrival,
-            },
-            {
-                $Type : 'UI.DataField',
-                Label : 'dateOfReturn',
-                Value : dateOfReturn,
-            },
-            {
-                $Type : 'UI.DataField',
-                Label : 'description',
-                Value : description,
-            },
-            {
-                $Type : 'UI.DataField',
-                Label : 'price',
-                Value : price,
-            },
-            {
-                $Type : 'UI.DataField',
-                Label : 'travelStatus',
-                Value : travelStatus,
-            },
-            {
-                $Type : 'UI.DataField',
-                Label : 'noOfDays',
-                Value : noOfDays,
-            },
-            {
-                $Type : 'UI.DataField',
-                Label : 'noOfPassengers',
-                Value : noOfPassengers,
-            },
-            {
-                $Type : 'UI.DataField',
-                Label : 'passengerName',
-                Value : passengerName,
-            },
-            {
-                $Type : 'UI.DataField',
                 Label : 'travelType',
                 Value : travelType,
+            },
+            {
+                $Type : 'UI.DataField',
+                Value : noOfPassengers,
+                Label : 'noOfPassengers',
             },
             {
                 $Type : 'UI.DataField',
@@ -113,24 +57,123 @@ annotate service.Travel with @(
                 Label : 'RoundTrip',
                 Value : RoundTrip,
             },
-            {
-                $Type : 'UI.DataField',
-                Label : 'Accomandation',
-                Value : Accomandation,
-            },
-            {
-                $Type : 'UI.DataField',
-                Label : 'billable',
-                Value : billable,
-            },
         ],
     },
     UI.Facets : [
         {
             $Type : 'UI.ReferenceFacet',
             ID : 'GeneratedFacet1',
-            Label : 'General Information',
+            Label : '{i18n>TravelDetails}',
             Target : '@UI.FieldGroup#GeneratedGroup1',
         },
+        {
+            $Type : 'UI.ReferenceFacet',
+            Label : 'Passenger Details',
+            ID : 'i18nTravelDetails',
+            Target : '@UI.FieldGroup#i18nTravelDetails1',
+        },
     ]
+);
+annotate service.Travel with @(
+    UI.HeaderFacets : [],
+    UI.FieldGroup #i18nTravelDetails : {
+        $Type : 'UI.FieldGroupType',
+        Data : [
+            {
+                $Type : 'UI.DataField',
+                Value : noOfPassengers,
+                Label : 'noOfPassengers',
+            },{
+                $Type : 'UI.DataField',
+                Value : travelMode,
+                Label : 'travelMode',
+            },{
+                $Type : 'UI.DataField',
+                Value : RoundTrip,
+                Label : 'RoundTrip',
+            },],
+    }
+);
+annotate service.Travel with @(
+    UI.FieldGroup #i18nTravelDetails1 : {
+        $Type : 'UI.FieldGroupType',
+        Data : [
+            {
+                $Type : 'UI.DataField',
+                Value : passengerName,
+                Label : 'Passenger Name',
+            },{
+                $Type : 'UI.DataField',
+                Value : origin,
+                Label : 'origin',
+            },{
+                $Type : 'UI.DataField',
+                Value : destination,
+                Label : 'destination',
+            },{
+                $Type : 'UI.DataField',
+                Value : dateOfDeparture,
+                Label : 'dateOfDeparture',
+            },{
+                $Type : 'UI.DataField',
+                Value : dateOfArrival,
+                Label : 'dateOfArrival',
+            },{
+                $Type : 'UI.DataField',
+                Value : dateOfReturn,
+                Label : 'dateOfReturn',
+            },{
+                $Type : 'UI.DataField',
+                Value : noOfDays,
+                Label : 'noOfDays',
+            },{
+                $Type : 'UI.DataField',
+                Value : billable,
+                Label : 'billable',
+            },{
+                $Type : 'UI.DataField',
+                Value : Accomandation,
+                Label : 'Accomandation',
+            },],
+    }
+);
+annotate service.Travel with @(
+    UI.SelectionFields : [
+        empId_Empid,
+        dateOfDeparture,
+        dateOfArrival,
+        travelStatus,
+    ]
+);
+annotate service.Travel with {
+    travelType
+    @mandatory;
+     noOfPassengers
+     @mandatory;
+     travelMode
+     @mandatory;
+     RoundTrip
+     @mandatory;
+};
+annotate service.Travel with {
+    empId @Common.Label : '{i18n>EmployeeId}'
+};
+annotate service.Travel with {
+    dateOfDeparture @Common.Label : '{i18n>DateOfDeparture}'
+};
+annotate service.Travel with {
+    travelStatus @Common.Label : '{i18n>TravelStatus}'
+};
+annotate service.Travel with {
+    dateOfArrival @Common.Label : '{i18n>DateOfArrival}'
+};
+annotate service.Travel with @(
+    UI.HeaderInfo : {
+        TypeName : '{i18n>TravelId}',
+        TypeNamePlural : '{i18n>TravelIds1}',
+        Title : {
+            $Type : 'UI.DataField',
+            Value : travelId,
+        },
+    }
 );
