@@ -91,17 +91,8 @@ sap.ui.define([
                 // location.reload();
 
                 this.getView().byId("Customer_input").setEnabled(false)
-
-
-
-
-
                 sap.ui.core.UIComponent.getRouterFor(this).getRoute('RouteView3').attachPatternMatched(this._onRouteMatched, this)
-
             },
-
-
-
             backButton: function () {
 
                 var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
@@ -111,11 +102,7 @@ sap.ui.define([
                 location.reload()
 
             },
-
-
-
             _onRouteMatched: function (oEvent) {
-
                 //  var component = this.getOwnerComponent();
 
                 //  component.refreshBinding();
@@ -144,12 +131,7 @@ sap.ui.define([
 
                     }).setValue(""));
 
-
-
                 }
-
-
-
             },
 
             destination: function () {
@@ -193,53 +175,25 @@ sap.ui.define([
                 // console.log("Formatted Date:", formattedDate);
 
                 let date = new Date(formattedDate);
-
                 arrDate = date.getDate()
-
                 arrMonth = (date.getMonth()) + 1
-
                 arrYear = date.getFullYear()
-
-
-
                 console.log(arrDate);
-
                 console.log(arrMonth);
-
                 console.log(arrYear);
-
-
-
                 // }
-
-
-
                 //    return "";
-
             },
-
-
-
             handleChange1: function (oEvent) {
-
                 var oDatePicker = oEvent.getSource();
-
                 var selectedDate = oDatePicker.getDateValue();
-
                 // console.log("Selected Date:", selectedDate);
-
                 var formattedDate = sap.ui.core.format.DateFormat.getDateInstance().format(selectedDate);
-
                 // console.log("Formatted Date:", formattedDate);
-
                 let date = new Date(formattedDate);
-
                 retDate = date.getDate()
-
                 retMonth = (date.getMonth()) + 1
-
                 retYear = date.getFullYear()
-
                 if (retMonth == 1 || retMonth == 3 || retMonth == 5 || retMonth == 7 || retMonth == 8 || retMonth == 10 || retMonth == 12) {
 
 

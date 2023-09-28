@@ -37,21 +37,21 @@ sap.ui.define(
           rejectBtn.setVisible(true);
         }
         var oOrigin = this.getView().byId("input1").getValue();
-        //  var oOrigin1 = this.getView().byId("input2").getSelectedItem().getText();
+         var oOrigin1 = this.getView().byId("input2").getSelectedItem().getText();
         //   var oOrigin2 = this.getView().byId("input3").getValue();
         //   var startDate=Date.parse(oOrigin2)
         console.log(oOrigin);
         //  console.log("hello");
         //  console.log(typeof(oOrigin2));
         //  var oOrigin3 = this.getView().byId("input4").getValue();
-        //  var oSearch = oEvent.getParameter("query");
+         //var oSearch = oEvent.getParameter("query");
         var oFilter = new Filter(
           "empId_Empid",
           FilterOperator.Contains,
           oOrigin
         );
 
-        // var oFilter1 = new Filter("travelStatus", FilterOperator.Contains, oOrigin1);
+         var oFilter1 = new Filter("travelStatus", FilterOperator.Contains, oOrigin);
 
         //  var oFilter2 = new Filter("dateOfDeparture",FilterOperator.Contains, oOrigin2);
 
@@ -59,11 +59,11 @@ sap.ui.define(
 
         var oList = this.getView().byId("table");
 
-        //  var aFilter =[oFilter,oFilter1] ;
+          var aFilter =[oFilter,oFilter1] ;
 
         oList.getBinding("items").filter(oFilter, FilterType.Application);
 
-        oList.getBinding("items").filter(oFilter1, FilterType.Application);
+        // oList.getBinding("items").filter(oFilter1, FilterType.Application);
       },
     });
   }
