@@ -104,65 +104,43 @@
     "routing": {
       "config": {
         "routerClass": "sap.m.routing.Router",
-        "viewType": "XML",        
+        "viewType": "XML",
         "viewPath": "probasicfiori.view",
         "controlId": "app",
         "transition": "slide",
         "controlAggregation": "pages",
-        
         "clearControlAggregation": false,
-			
-				"async": true
+        "async": true
       },
       "routes": [
         {
           "name": "RouteView1",
           "pattern": ":?query:",
-          
           "target": [
             "TargetView1"
           ]
         },
         {
-
           "name": "RouteView2",
-
           "pattern": "page2",
-
           "target": [
-
             "TargetView2"
-
           ]
-
-      },
-
-      {
-
+        },
+        {
           "name": "RouteView3",
-
-          "pattern": "page3",
-
+          "pattern": "page3/{travelType}/{travelMode}/{NumberOfPassenger}/{tripType}",
           "target": [
-
             "TargetView3"
-
           ]
-
-      },
-      {
-
-        "name": "RouteView4",
-
-        "pattern": "page4/{invoicePath}",
-
-        "target": [
-
-          "TargetView4"
-
-        ]
-
-    }
+        },
+        {
+          "name": "RouteView4",
+          "pattern": "page4/{invoicePath}",
+          "target": [
+            "TargetView4"
+          ]
+        }
       ],
       "targets": {
         "TargetView1": {
@@ -173,45 +151,26 @@
           "viewName": "View1"
         },
         "TargetView2": {
-
           "viewType": "XML",
-
           "transition": "slide",
-
           "clearControlAggregation": false,
           "viewId": "View2",
-
           "viewName": "View2"
-
-      },
-
-      "TargetView3": {
-
+        },
+        "TargetView3": {
           "viewType": "XML",
-
           "transition": "slide",
-
           "clearControlAggregation": false,
-
           "viewId": "View3",
-
           "viewName": "View3"
-
-      },
-
-      "TargetView4": {
-
-        "viewType": "XML",
-
-        "transition": "slide",
-
-        "clearControlAggregation": false,
-
-        "viewId": "View4",
-
-        "viewName": "View4"
-
-    }
+        },
+        "TargetView4": {
+          "viewType": "XML",
+          "transition": "slide",
+          "clearControlAggregation": false,
+          "viewId": "View4",
+          "viewName": "View4"
+        }
       }
     },
     "rootView": {
