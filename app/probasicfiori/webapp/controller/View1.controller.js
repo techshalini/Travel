@@ -65,6 +65,7 @@ sap.ui.define(
 
         // oList.getBinding("items").filter(oFilter1, FilterType.Application);
       },
+      
     });
   }
 );

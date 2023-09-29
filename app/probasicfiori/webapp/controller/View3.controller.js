@@ -1,477 +1,590 @@
-sap.ui.define([
-
-
-
+sap.ui.define(
+  [
     "sap/ui/core/mvc/Controller",
 
     // "sap/ui/core/mvc/Controller/View3",
 
     "sap/m/MessageToast",
 
-
-
     "sap/ui/core/Fragment",
-
-
 
     "sap/ui/model/Filter",
 
-
-
     "sap/ui/model/FilterOperator",
 
-    "sap/ui/core/UIComponent"
+    "sap/ui/core/UIComponent",
+
+    "sap/ui/model/json/JSONModel",
+  ],
+
+  /**
 
 
 
-],
+   * @param {typeof sap.ui.core.mvc.Controller} Controller
 
 
 
-    /**
+   */
 
- 
+  function (
+    Controller,
+    MessageToast,
+    Fragment,
+    Filter,
+    FilterOperator,
+    UIComponent,
+    JSONModel
+  ) {
+    "use strict";
 
-     * @param {typeof sap.ui.core.mvc.Controller} Controller
+    // var oModel = new JSONModel({
 
- 
+    //     items: [
 
-     */
+    //        { name: "Item 1", description: "Description 1" },
 
+    //        { name: "Item 2", description: "Description 2" },
 
+    //        { name: "Item 3", description: "Description 3" }
 
-    function (Controller, MessageToast, Fragment, Filter, FilterOperator, UIComponent) {
+    //     ]
 
+    //  });
 
+    //  // Set the model to the view
 
-        "use strict";
+    //  this.getView().byId("listId").setModel(oModel);
 
+    var travelType;
+    var travelMode;
+    var NumberOfPassenger;
+    var tripType;
 
+    var retDate;
+    var retMonth;
+    var retYear;
 
-        var travelType;
+    var arrDate;
+    var arrMonth;
+    var arrYear;
 
-        var travelMode;
+    var depDate;
+    var depMonth;
+    var depYear;
 
-        var NumberOfPassenger;
+    var PassengerNameArr = [];
 
-        var tripType;
+    var field;
 
-        var retDate;
+    var id = 1;
 
-        var retMonth;
+    var PassengerName1;
+    var PassengerName2;
+    var PassengerName3;
+    var PassengerName4;
+    var PassengerName5;
 
-        var retYear;
+    var origin;
+    var destination;
 
-        var arrDate;
+    var billable_value;
 
-        var arrMonth;
+    var BillableCustomer;
 
-        var arrYear;
+    var DepoDatePicker;
+    var DepselectedDate;
+    var DepformattedDate;
+    var Depdate;
 
+    var ArroDatePicker;
+    var ArrselectedDate;
+    var ArrformattedDate;
+    var Arrdate;
 
+    var RetoDatePicker;
+    var RetselectedDate;
+    var RetformattedDate;
+    var Retdate;
 
-        return Controller.extend("probasicfiori.controller.View3", {
+    var NumberOfmonth;
+    var NumberOfdays;
 
+    var hotelAccVal;
 
+    // var data=oEvent.mParameters.arguments;
 
-            onInit: function (oEvent) {
+    //   var tripType=data.tripType;
 
-                // var rejectBtn = this.getView().byId("_IDGenMultiInput1");
+    //   var NumberOfPassenger=data.NumberOfPassenger;
 
-                //     var rejectBtn = this.getView().byId("_IDGenMultiInput1").setEnabled(false);
+    //   var travelMode=data.travelMode;
 
-                //     if(rejectBtn.getVisible()) {
+    //   var travelType=data.travelType;
 
-                //        rejectBtn.setVisible(false);
+    return Controller.extend("probasicfiori.controller.View3", {
+      onInit: function (oEvent) {
+        // var rejectBtn = this.getView().byId("_IDGenMultiInput1");
 
-                //    }
+        //     var rejectBtn = this.getView().byId("_IDGenMultiInput1").setEnabled(false);
 
-                //    abc.setEnabled(false);
+        //     if(rejectBtn.getVisible()) {
 
-                // location.reload();
+        //        rejectBtn.setVisible(false);
 
-                this.getView().byId("Customer_input").setEnabled(false)
-                sap.ui.core.UIComponent.getRouterFor(this).getRoute('RouteView3').attachPatternMatched(this._onRouteMatched, this)
-            },
-            backButton: function () {
+        //    }
 
-                var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
+        //    abc.setEnabled(false);
 
-                oRouter.navTo("RouteView2")
+        // location.reload();
 
-                location.reload()
+        this.getView().byId("_IDGenButton1").setEnabled(false);
 
-            },
-            _onRouteMatched: function (oEvent) {
-                //  var component = this.getOwnerComponent();
+        this.getView().byId("BillableCustomer").setEnabled(false);
 
-                //  component.refreshBinding();
+        this.getView().byId("_IDGenInput1").setEnabled(false);
 
-                travelType = oEvent.mParameters.arguments.travelType;
+        // console.log({Employee});
 
-                travelMode = oEvent.mParameters.arguments.travelMode;
+        //    var abbb=this.getView().byId("NameOfPassenger")
 
-                NumberOfPassenger = oEvent.mParameters.arguments.NumberOfPassenger;
+        //    debugger;
 
-                tripType = oEvent.mParameters.arguments.tripType;
+        // console.log(abbb);
 
+        sap.ui.core.UIComponent.getRouterFor(this)
+          .getRoute("RouteView3")
+          .attachPatternMatched(this._onRouteMatched, this);
+      },
 
+      Cancel: function () {
+        location.reload();
+      },
 
-                for (let index = 0; index < NumberOfPassenger; index++) {
+      onSubmit: function () {},
 
-                    let field = this.getView().byId("_IDGenSimpleForm2");
+      nameofPassenger: function () {
+        PassengerName1 = this.getView()
+          .byId("NameOfPassenger00")
+          .getSelectedItem()
+          .getText();
 
-                    console.log(field);
+        console.log(PassengerName1);
 
-                    field.addContent(new sap.m.MultiInput({
+        PassengerNameArr.push(PassengerName1);
+      },
 
-                        width: "300px",
+      nameofPassenger1: function () {
+        PassengerName2 = this.getView()
+          .byId("NameOfPassenger01")
+          .getSelectedItem()
+          .getText();
 
+        console.log(PassengerName2);
 
+        PassengerNameArr.push(PassengerName2);
+      },
 
-                    }).setValue(""));
+      nameofPassenger2: function () {
+        PassengerName3 = this.getView()
+          .byId("NameOfPassenger02")
+          .getSelectedItem()
+          .getText();
 
+        console.log(PassengerName3);
+
+        PassengerNameArr.push(PassengerName3);
+      },
+
+      nameofPassenger3: function () {
+        PassengerName4 = this.getView()
+          .byId("NameOfPassenger03")
+          .getSelectedItem()
+          .getText();
+
+        console.log(PassengerName4);
+
+        PassengerNameArr.push(PassengerName4);
+      },
+
+      nameofPassenger4: function () {
+        var PassengerName5 = this.getView()
+          .byId("NameOfPassenger04")
+          .getSelectedItem()
+          .getText();
+
+        console.log(PassengerName5);
+
+        PassengerNameArr.push(PassengerName5);
+      },
+
+      backButton: function () {
+        var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
+
+        oRouter.navTo("RouteView2");
+
+        location.reload();
+      },
+
+      _onRouteMatched: function (oEvent) {
+        //  var component = this.getOwnerComponent();
+
+        //  component.refreshBinding();
+
+        travelType = oEvent.mParameters.arguments.travelType;
+
+        travelMode = oEvent.mParameters.arguments.travelMode;
+
+        NumberOfPassenger = oEvent.mParameters.arguments.NumberOfPassenger;
+
+        tripType = oEvent.mParameters.arguments.tripType;
+
+        for (let index = 0; index < 5 - NumberOfPassenger; index++) {
+          let selectfield = this.getView().byId(`NameOfPassenger0${id}`);
+
+          if (selectfield.getVisible()) {
+            selectfield.setVisible(false);
+          }
+
+          id = id + 1;
+
+          // console.log(id);
+
+          //  field= this.getView().byId("_IDGenSimpleForm2").addContent(new sap.m.MultiInput({
+
+          // //   id:"MultiInputPassenger",
+
+          //    width:"300px",
+
+          //  }).setValue("hh"))
+
+          //  this.getView().byId("MultiInputPassenger").addContent(new sap.m.items)({
+
+          //     text:"{Name}"
+
+          //  })
+        }
+      },
+
+      destination: function () {
+        // console.log(oEvent);
+
+        origin = this.getView().byId("city").getSelectedItem().getText();
+
+        destination = this.getView().byId("city2").getSelectedItem().getText();
+
+        console.log(origin);
+
+        console.log(destination);
+
+        if (origin == destination) {
+          alert("Origin or Destination can't be same");
+
+          this.getView().byId("city2").getSelectedItem().setValue("");
+        }
+      },
+
+      handleChange01: function (oEvent) {
+        DepoDatePicker = oEvent.getSource();
+
+        DepselectedDate = DepoDatePicker.getDateValue();
+
+        // console.log("Selected Date:", selectedDate);
+
+        DepformattedDate =
+          sap.ui.core.format.DateFormat.getDateInstance().format(
+            DepselectedDate
+          );
+
+        // console.log("Formatted Date:", formattedDate);
+
+        Depdate = new Date(DepformattedDate);
+
+        depDate = Depdate.getDate();
+
+        depMonth = Depdate.getMonth() + 1;
+
+        depYear = Depdate.getFullYear();
+
+        console.log(depDate);
+
+        console.log(depMonth);
+
+        console.log(depYear);
+      },
+
+      handleChange: function (oEvent) {
+        ArroDatePicker = oEvent.getSource();
+
+        ArrselectedDate = ArroDatePicker.getDateValue();
+
+        // console.log("Selected Date:", selectedDate);
+
+        ArrformattedDate =
+          sap.ui.core.format.DateFormat.getDateInstance().format(
+            ArrselectedDate
+          );
+
+        // console.log("Formatted Date:", formattedDate);
+
+        Arrdate = new Date(ArrformattedDate);
+
+        arrDate = Arrdate.getDate();
+
+        arrMonth = Arrdate.getMonth() + 1;
+
+        arrYear = Arrdate.getFullYear();
+
+        if (depMonth === arrMonth) {
+          if (depDate > arrDate) {
+            alert("Arrival Date not valid");
+
+            this.getView().byId("datePicker1").setValue("");
+          }
+        } else if (depMonth < arrMonth) {
+          if (depDate > arrDate) {
+            alert("Arrival Date not valid");
+          }
+        } else if (depMonth > arrMonth) {
+          if (depDate > arrDate) {
+            alert("Arrival Date not valid");
+          }
+        }
+
+        console.log(arrDate);
+
+        console.log(arrMonth);
+
+        console.log(arrYear);
+      },
+
+      handleChange1: function (oEvent) {
+        RetoDatePicker = oEvent.getSource();
+
+        RetselectedDate = RetoDatePicker.getDateValue();
+
+        // console.log("Selected Date:", selectedDate);
+
+        RetformattedDate =
+          sap.ui.core.format.DateFormat.getDateInstance().format(
+            RetselectedDate
+          );
+
+        // console.log("Formatted Date:", formattedDate);
+
+        Retdate = new Date(RetformattedDate);
+
+        retDate = Retdate.getDate();
+
+        retMonth = Retdate.getMonth() + 1;
+
+        retYear = Retdate.getFullYear();
+
+        if (
+          retMonth == 1 ||
+          retMonth == 3 ||
+          retMonth == 5 ||
+          retMonth == 7 ||
+          retMonth == 8 ||
+          retMonth == 10 ||
+          retMonth == 12
+        ) {
+          NumberOfmonth = (retMonth - arrMonth) * 31;
+        } else if (
+          retMonth == 4 ||
+          retMonth == 6 ||
+          retMonth == 9 ||
+          retMonth == 11
+        ) {
+          NumberOfmonth = (retMonth - arrMonth) * 30;
+        } else if (retMonth == 2) {
+          NumberOfmonth = (retMonth - arrMonth) * 28;
+        }
+
+        NumberOfdays = retDate - arrDate + NumberOfmonth;
+
+        if (NumberOfdays < 0) {
+          alert("Return date can't be backDate");
+
+          this.getView().byId("datePicker2").setValue("");
+        } else if (NumberOfdays == 0) {
+          this.getView().byId("_IDGenInput1").setValue(NumberOfdays);
+
+          this.getView().byId("_IDGenSwitch1").setState(false);
+
+          hotelAccVal = "No";
+
+          console.log(hotelAccVal);
+        } else if (NumberOfdays >= 1) {
+          this.getView().byId("_IDGenInput1").setValue(NumberOfdays);
+
+          this.getView().byId("_IDGenSwitch1").setState(true);
+
+          hotelAccVal = "Yes";
+
+          console.log(hotelAccVal);
+        }
+
+        if (PassengerNameArr) {
+          if (origin) {
+            if (destination) {
+              if (billable_value == "Yes") {
+                if (BillableCustomer) {
+                  this.getView().byId("_IDGenButton1").setEnabled(true);
                 }
-            },
-
-            destination: function () {
-
-                var origin = this.getView().byId("city").getSelectedItem().getText();
-
-                var destination = this.getView().byId("city2").getSelectedItem().getText()
-
-                if (origin == destination) {
-
-                    alert("Origin or Destination can't be same")
-
-                }
-
-            },
-
-
-
-            handleChange: function (oEvent) {
-
-                //     var oDatePicker = this.getView().byId("DP1"); // Replace with your DatePicker's ID
-
-                //     var selectedDate = oDatePicker.getValue();
-
-                //    console.log(selectedDate);
-
-                // console.log("hello");
-
-                // alert("hello")
-
-                //git checking
-
-                var oDatePicker = oEvent.getSource();
-
-                var selectedDate = oDatePicker.getDateValue();
-
-                // console.log("Selected Date:", selectedDate);
-
-                var formattedDate = sap.ui.core.format.DateFormat.getDateInstance().format(selectedDate);
-
-                // console.log("Formatted Date:", formattedDate);
-
-                let date = new Date(formattedDate);
-                arrDate = date.getDate()
-                arrMonth = (date.getMonth()) + 1
-                arrYear = date.getFullYear()
-                console.log(arrDate);
-                console.log(arrMonth);
-                console.log(arrYear);
-                // }
-                //    return "";
-            },
-            handleChange1: function (oEvent) {
-                var oDatePicker = oEvent.getSource();
-                var selectedDate = oDatePicker.getDateValue();
-                // console.log("Selected Date:", selectedDate);
-                var formattedDate = sap.ui.core.format.DateFormat.getDateInstance().format(selectedDate);
-                // console.log("Formatted Date:", formattedDate);
-                let date = new Date(formattedDate);
-                retDate = date.getDate()
-                retMonth = (date.getMonth()) + 1
-                retYear = date.getFullYear()
-                if (retMonth == 1 || retMonth == 3 || retMonth == 5 || retMonth == 7 || retMonth == 8 || retMonth == 10 || retMonth == 12) {
-
-
-
-                    var NumberOfmonth = (retMonth - arrMonth) * 31
-
-                }
-
-                else if (retMonth == 4 || retMonth == 6 || retMonth == 9 || retMonth == 11) {
-
-                    var NumberOfmonth = (retMonth - arrMonth) * 30
-
-                }
-
-                else if (retMonth == 2) {
-
-                    var NumberOfmonth = (retMonth - arrMonth) * 28
-
-                }
-
-                var NumberOfdays = (retDate - arrDate) + NumberOfmonth
-
-                if (NumberOfdays < 0) {
-
-                    alert("Return date can't be backDate")
-
-                }
-
-                else if (NumberOfdays == 0) {
-
-                    this.getView().byId("_IDGenInput1").setValue(NumberOfdays)
-
-                }
-
-                else if (NumberOfdays >= 1) {
-
-                    this.getView().byId("_IDGenInput1").setValue(NumberOfdays)
-
-                    this.getView().byId("_IDGenSwitch1").setState(true)
-
-                }
-
-                console.log(retDate);
-
-                console.log(retMonth);
-
-                console.log(retYear);
-
-                console.log(NumberOfdays);
-
-
-
-            },
-
-
-
-            hhh: function () {
-
-                console.log(this.getView().byId("_IDGenSwitch1").getState());
-
-            },
-
-
-
-            billable: function () {
-
-                var billable_value = this.getView().byId("billable_value").getSelectedItem().getText();
-
-                if (billable_value == "Yes") {
-
-                    this.getView().byId("Customer_input").setEnabled(true)
-
-                }
-
-                else {
-
-                    this.getView().byId("Customer_input").setEnabled(false)
-
-
-
-                }
-
-            },
-
-
-
-
-
-            onValueHelpClose: function (oEvent) {
-
-
-
-                var oSelectedItem = oEvent.getParameter("selectedItem");
-
-
-
-                oEvent.getSource().getBinding("items").filter([]);
-
-
-
-                if (!oSelectedItem) {
-
-
-
-
-
-
-
-                    return;
-
-
-
-                }
-
-
-
-
-
-
-
-                this.byId("singleCondition").setValue(oSelectedItem.getTitle());
-
-
-
-            },
-
-
-
-            onValueHelpSearch: function (oEvent) {
-
-
-
-                var sValue = oEvent.getParameter("value");
-
-
-
-                var oFilter = new Filter("passengerName", FilterOperator.Contains, sValue);
-
-
-
-                oEvent.getSource().getBinding("items").filter([oFilter]);
-
-
-
-            },
-
-
-
-            onOpenDialog: function () {
-
-
-
-
-
-
-
-                // create dialog lazily
-
-
-
-                if (!this.pDialog) {
-
-
-
-                    this.pDialog = this.loadFragment({
-
-
-
-                        name: "probasicfiori.view.dialog"
-
-
-
-
-
-
-
-                    });
-
-
-
-                }
-
-
-
-                this.pDialog.then(function (oDialog) {
-
-
-
-                    oDialog.open();
-
-
-
-                });
-
-
-
-            },
-
-
-
-
-
-
-
-
-
-
-
-            onSubmit: function () {
-
-
-
-                var ID = this.getView().byId("").getValue();
-
-
-
-                var name = this.getView().byId("").getValue();
-
-
-
-                var data = {
-
-
-
-                    ID: parseInt(ID),
-
-
-
-                    name: name
-
-
-
-                };
-
-
-
-                var odataModel = this.getOwnercomponent().getModel();
-
-
-
-                odataModel.create("/Travel", data, {
-
-
-
-                    success: function (data, response) {
-
-
-
-                        MessageToast.show("Successfully created");
-
-
-
-                    },
-
-
-
-                    error: function (error) {
-
-
-
-                        MessageToast.show("Error while creating data");
-
-
-
+              } else {
+                if (Depdate) {
+                  if (Arrdate)
+                    if (Retdate) {
+                      if (NumberOfdays >= 0) {
+                        this.getView().byId("_IDGenButton1").setEnabled(true);
+                      }
                     }
-
-
-
-                });
-
-
-
+                }
+              }
             }
+          }
+        }
 
+        console.log(retDate);
 
+        console.log(retMonth);
 
+        console.log(retYear);
+
+        console.log(NumberOfdays);
+      },
+
+      billable: function () {
+        billable_value = this.getView()
+          .byId("billable_value")
+          .getSelectedItem()
+          .getText();
+
+        console.log(billable_value);
+
+        if (billable_value == "Yes") {
+          this.getView().byId("BillableCustomer").setEnabled(true);
+        } else {
+          this.getView().byId("BillableCustomer").setEnabled(false);
+        }
+      },
+
+      BillableCustomer: function () {
+        BillableCustomer = this.getView()
+          .byId("BillableCustomer")
+          .getSelectedItem()
+          .getText();
+
+        console.log(BillableCustomer);
+      },
+
+      onValueHelpClose: function (oEvent) {
+        var oSelectedItem = oEvent.getParameter("selectedItem");
+
+        oEvent.getSource().getBinding("items").filter([]);
+
+        if (!oSelectedItem) {
+          return;
+        }
+
+        this.byId("singleCondition").setValue(oSelectedItem.getTitle());
+      },
+
+      onValueHelpSearch: function (oEvent) {
+        var sValue = oEvent.getParameter("value");
+
+        var oFilter = new Filter(
+          "passengerName",
+          FilterOperator.Contains,
+          sValue
+        );
+
+        oEvent.getSource().getBinding("items").filter([oFilter]);
+      },
+
+      onOpenDialog: function () {
+        // create dialog lazily
+
+        if (!this.pDialog) {
+          this.pDialog = this.loadFragment({
+            name: "probasicfiori.view.dialog",
+          });
+        }
+
+        this.pDialog.then(function (oDialog) {
+          oDialog.open();
         });
+      },
 
+      onSubmit: function () {
+        var oTravel = {
+          travelId: "",
 
+          empId_Empid: "",
 
+          empName_Empid: "",
+
+          origin: origin,
+
+          destination: destination,
+
+          dateOfDeparture: Depdate,
+
+          dateOfArrival: arrDate,
+
+          dateOfReturn: retYear,
+
+          description: "Success hai boss",
+
+          price: null,
+
+          travelStatus: "",
+
+          noOfDays: NumberOfdays,
+
+          noOfPassengers: NumberOfPassenger,
+
+          passengerName: [],
+
+          travelType: travelType,
+
+          travelMode: travelMode,
+
+          RoundTrip: tripType,
+
+          Accomandation: hotelAccVal,
+
+          billable: billable_value,
+        };
+
+        var JsonData = JSON.stringify(oTravel);
+
+        console.log(JsonData);
+
+        var EndPoint = "http://localhost:4004/odata/v4/travel/Travel";
+
+        fetch(EndPoint, {
+          method: "POST",
+
+          headers: {
+            "Content-Type": "application/json",
+          },
+
+          body: JsonData,
+        })
+          .then(function (res) {
+            if (res.ok) {
+              console.log("Entity created successfully");
+            } else {
+              console.log("Failed");
+            }
+          })
+
+          .catch(function (err) {
+            console.log("error", err);
+          });
+      },
     });
+  }
+);
