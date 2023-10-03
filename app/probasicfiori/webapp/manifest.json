@@ -92,6 +92,7 @@
           "autoExpandSelect": true,
           "earlyRequests": true
         }
+        
       }
     },
     "resources": {
@@ -180,4 +181,5 @@
       "id": "App"
     }
   }
+  
 }
