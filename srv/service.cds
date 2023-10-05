@@ -1,6 +1,6 @@
 using {travel as t} from '../db/schema';
 
-
+ @requires: ['viewer_scope', 'editor_scope']
 service travelService {
 
 

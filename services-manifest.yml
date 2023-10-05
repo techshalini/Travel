@@ -1,0 +1,14 @@
+# Generated services-manifest.yml based on template version 0.1.0
+# appName = TravelManagement
+---
+create-services:
+# ------------------------------------------------------------
+  - name:   TravelManagement-auth
+    broker: xsuaa
+    plan: application
+# ------------------------------------------------------------
+  - name:   TravelManagement-db
+    broker: hana  # 'hanatrial' on trial landscapes
+    plan: "hdi-shared"
+    broker: hana
+    plan: db

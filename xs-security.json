@@ -1,0 +1,38 @@
+{
+  "xsappname": "TravelManagement",
+  "tenant-mode": "shared",
+  "oauth2-configuration": {
+      "redirect-uris": [
+          "https://8ecb9d79trial-trial-bkcgfejn-dev-travelmanagement-aprouter.cfapps.us10-001.hana.ondemand.com"
+      ]
+    },
+  "scopes": [
+    {
+      "name": "$XSAPPNAME.viewer_scope",
+      "description": "viewer_scope"
+    },
+    {
+      "name": "$XSAPPNAME.editor_scope",
+      "description": "editor_scope"
+    }
+  ],
+  "attributes": [],
+  "role-templates": [
+    {
+      "name": "viewer",
+      "description": "generated",
+      "scope-references": [
+        "$XSAPPNAME.viewer_scope"
+      ],
+      "attribute-references": []
+    },
+    {
+      "name": "editor",
+      "description": "generated",
+      "scope-references": [
+        "$XSAPPNAME.editor_scope"
+      ],
+      "attribute-references": []
+    }
+  ]
+}
